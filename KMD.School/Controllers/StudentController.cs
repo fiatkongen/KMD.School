@@ -70,7 +70,7 @@ public class StudentController(IStudentRepository studentRepository, AppDbContex
     }
 
     [HttpPost("random")]
-    public async Task<IActionResult> CreateRandomStudentsAsync(int randomStudentsCount)
+    public async Task<IActionResult> CreateRandomStudentsAsync(int randomStudentsCount = 10)
     {
         var names = await _randomNameGenerator.GenerateRandomUniqueNames(randomStudentsCount);
         var students = names.Select(x => new Student(
