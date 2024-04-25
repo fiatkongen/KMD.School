@@ -12,6 +12,7 @@ namespace KMD.School.Test.Integration
         {
             internal const string AllStudents = "/api/student/all";
             internal const string Student = "/api/student";
+            internal const string RandomStudents = "/api/student/random";
         }
     }
 }

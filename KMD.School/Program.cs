@@ -21,6 +21,7 @@ namespace KMD.School
             builder.Services.AddTransient<IStudentRepository, StudentRepository>();
             builder.Services.AddTransient<DbContext, AppDbContext>();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
+            builder.Services.AddTransient<IRandomNameGenerator, DanishRandomNameGenerator>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

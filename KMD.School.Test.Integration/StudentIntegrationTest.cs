@@ -177,6 +177,25 @@ public class StudentIntegrationTest
         allStudents.First().Should().BeEquivalentTo(modifyStudentDto, options => options.ExcludingMissingMembers());
     }
 
+    [Fact]
+    public async void when_creating_a_random_number_of_students_then_create_random_students_and_return_ok()
+    {
+        //Arrange
+        int randomStudentsCount = 10;
+        await SeedDb(new List<Student>());
+        var client = _factory.CreateClient();
+
+        // Act
+        var responseCreateStudent = await client.PostAsync(HttpHelper.Urls.RandomStudents + "?randomStudentsCount=" + randomStudentsCount, null);
+
+        // Assert
+        responseCreateStudent.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        
+        var responseAllStudents = await client.GetAsync(HttpHelper.Urls.AllStudents);
+        var allStudents = await responseAllStudents.Content.ReadFromJsonAsync<List<StudentDto>>();
+        allStudents.Count.Should().Be(randomStudentsCount);
+    }
+
     private async Task SeedDb(List<Student> testStudents)
     {
         using (var scope = _factory.Services.CreateScope())

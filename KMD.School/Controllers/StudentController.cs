@@ -3,16 +3,18 @@ using KMD.School.Dto;
 using KMD.School.Infrastructure;
 using KMD.School.Model;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace KMD.School.Controllers;
 
 [ApiController]
 [Route("api/student")]
-public class StudentController(IStudentRepository studentRepository, AppDbContext appDbContext, IMapper mapper) : ControllerBase
+public class StudentController(IStudentRepository studentRepository, AppDbContext appDbContext, IMapper mapper, IRandomNameGenerator _randomNameGenerator) : ControllerBase
 {
     private readonly AppDbContext _appDbContext = appDbContext;
     private readonly IStudentRepository _studentRepository = studentRepository;
     private readonly IMapper _mapper = mapper;
+    private readonly IRandomNameGenerator _randomNameGenerator = _randomNameGenerator;
 
     [HttpGet("{id}")]
     public async Task<ObjectResult> GetStudentAsync(Guid id)
@@ -64,6 +66,26 @@ public class StudentController(IStudentRepository studentRepository, AppDbContex
         }
         _studentRepository.RemoveStudentAsync(student);
         await _appDbContext.SaveChangesAsync();
+        return Ok();
+    }
+
+    [HttpPost("random")]
+    public async Task<IActionResult> CreateRandomStudentsAsync(int randomStudentsCount)
+    {
+        var names = await _randomNameGenerator.GenerateRandomUniqueNames(randomStudentsCount);
+        var students = names.Select(x => new Student(
+            Guid.NewGuid(), 
+            x.Split(" ")[0], 
+            x.Split(" ")[1],
+            "Skolevej",
+            DateTime.Today.AddYears(0 - new Random().Next(6, 16)))).ToList();
+
+        foreach (var student in students)
+        {
+            await _studentRepository.AddStudentAsync(student);
+        }
+        await _appDbContext.SaveChangesAsync();
+
         return Ok();
     }
 
