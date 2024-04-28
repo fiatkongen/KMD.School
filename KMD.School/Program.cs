@@ -1,5 +1,6 @@
 
-using KMD.School.Infrastructure;
+
+using KMD.School.Infrastucture.Infrastructure;
 using KMD.School.Model;
 using Microsoft.EntityFrameworkCore;
 

@@ -2,8 +2,7 @@
 using KMD.School.Dto;
 using KMD.School.Model;
 
-
-namespace KMD.School.Infrastructure;
+namespace KMD.School.Infrastucture.Infrastructure;
 
 public class MappingProfile : Profile
 {

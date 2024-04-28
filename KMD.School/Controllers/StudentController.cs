@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using KMD.School.Dto;
-using KMD.School.Infrastructure;
+
 using KMD.School.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using KMD.School.Infrastucture.Infrastructure;
 
 namespace KMD.School.Controllers;
 

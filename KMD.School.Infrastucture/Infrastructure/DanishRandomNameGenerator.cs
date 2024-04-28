@@ -1,6 +1,6 @@
 using KMD.School.Model;
 
-namespace KMD.School.Infrastructure;
+namespace KMD.School.Infrastucture.Infrastructure;
 
 public class DanishRandomNameGenerator : IRandomNameGenerator
 {

@@ -1,7 +1,7 @@
 ﻿using KMD.School.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace KMD.School.Infrastructure;
+namespace KMD.School.Infrastucture.Infrastructure;
 
 public class StudentRepository : IStudentRepository
 {

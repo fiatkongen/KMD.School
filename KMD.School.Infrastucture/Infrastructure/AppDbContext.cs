@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using KMD.School.Model;
+﻿using KMD.School.Model;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace KMD.School.Infrastructure;
+namespace KMD.School.Infrastucture.Infrastructure;
 
 public class AppDbContext : DbContext
 {
